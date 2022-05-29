@@ -1,9 +1,21 @@
 pipeline {
-    agent { docker { image 'maven:3.8.4-openjdk-11-slim' } }
+//     agent { docker { image 'maven:3.8.4-openjdk-11-slim' } }
+//     stages {
+//         stage('build') {
+//             steps {
+//                 sh 'mvn --version'
+//             }
+//         }
+//     }
+    
+    agent any
+    triggers {
+        pollSCM '* * * * *'
+    }
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'mvn --version'
+                sh 'docker version'
             }
         }
     }
